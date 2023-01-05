@@ -13,7 +13,7 @@ Fetch SPAD is a plugin that pulls the Spiritual Principle A Day and puts it on y
 
 SHORTCODE
 Basic: [spad]
-Layout: Table, Block [jft layout=""]
+Layout: Table, Block [spad layout=""]
 
 EXAMPLES
 
