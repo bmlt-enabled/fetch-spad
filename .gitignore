@@ -1,4 +1,9 @@
+.project
+.settings/*
+.vscode/*
 .DS_Store
 .idea
-logs
-composer.lock
+vendor/
+logs/
+build/
+*.zip

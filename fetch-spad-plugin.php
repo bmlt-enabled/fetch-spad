@@ -29,9 +29,10 @@ function spad_add_settings_link($links)
 }
 $plugin = plugin_basename(__FILE__);
 add_filter("plugin_action_links_$plugin", 'spad_add_settings_link');
-add_action( 'wp_enqueue_scripts', 'spad_assets' );
+add_action('wp_enqueue_scripts', 'spad_assets');
 
-function spad_assets() {
+function spad_assets()
+{
     wp_enqueue_style("spadcss", plugin_dir_url(__FILE__) . "css/spad.css", false, filemtime(plugin_dir_path(__FILE__) . "css/spad.css"), false);
 }
 

@@ -5,5 +5,8 @@ composer.json export-ignore
 composer.lock export-ignore
 Dockerfile export-ignore
 docker-compose.yml export-ignore
-/.github export-ignore
+Makefile export-ignore
 /assets export-ignore
+/docs export-ignore
+/.github export-ignore
+.phpcs.xml export-ignore

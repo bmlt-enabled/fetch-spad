@@ -27,10 +27,10 @@ function fetch_spad_plugin_page()
                         <select id="spad_layout" name="spad_layout">
                             <option value="table" <?php if (esc_attr(get_option('spad_layout'))=='table') {
                                 echo 'selected="selected"';
-                            } ?>>Table (Raw HTML)</option>
+                                                  } ?>>Table (Raw HTML)</option>
                             <option value="block" <?php if (esc_attr(get_option('spad_layout'))=='block') {
                                 echo 'selected="selected"';
-                            } ?>>Block</option>
+                                                  } ?>>Block</option>
                         </select>
                         <p class="description">Change between raw HTML Table and CSS block elements.</p>
                     </td>
