@@ -10,15 +10,15 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-      - name: Check out code
+      - name: Check out code 🛒
         uses: actions/checkout@v3
 
-      - name: Setup PHP
+      - name: Setup PHP 🐫
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
 
-      - name: PHPCS checker
+      - name: PHPCS checker 🧹
         id: php-codesniffer
         run: make lint
 
@@ -39,8 +39,8 @@ jobs:
       MAINFILE: "fetch-spad-plugin.php"
     needs: [ lint ]
     steps:
-      - uses: actions/checkout@v3
-        id: code-checkout
+      - name: Check out code 🛒
+        uses: actions/checkout@v3
 
       - name: Build package 🔧
         id: build-package
