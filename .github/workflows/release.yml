@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v3
         id: code-checkout
 
-      - name: Build package
+      - name: Build package 🔧
         id: build-package
         run: |
           export ZIP_FILENAME=${PLUGIN}-${GITHUB_REF##*/}.zip
@@ -72,7 +72,7 @@ jobs:
           bodyFile: "changelog.txt"
           prerelease: ${{ env.RELEASE_TYPE }}
 
-#      - name: Wordpress Release
+#      - name: Wordpress Release ⛴
 #        if: "!contains(github.ref, 'beta')"
 #        id: wordpress-stable-release
 #        env:
