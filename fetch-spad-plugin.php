@@ -44,16 +44,23 @@ function spad_func($atts = [])
         ),
         $atts
     );
+    $HTTP_RETRIEVE_ARGS = array(
+        'headers' => array(
+            'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:105.0) Gecko/20100101 Firefox/105.0'
+        ),
+        'timeout' => 60
+    );
 
     $spad_layout = (!empty($args['layout']) ? sanitize_text_field(strtolower($args['layout'])) : get_option('spad_layout'));
     $spad_url = 'https://spadna.org';
     $spad_dom_element = 'table';
     $char_encoding = "UTF-8";
-
+    $spad_get = wp_remote_get($spad_url, $HTTP_RETRIEVE_ARGS);
+    $spad_body = wp_remote_retrieve_body($spad_get);
     // Get the contents of SPAD
     if ($spad_layout == 'block') {
         libxml_use_internal_errors(true);
-        $spad_data = mb_convert_encoding(wp_remote_fopen($spad_url), 'HTML-ENTITIES', $char_encoding);
+        $spad_data = mb_convert_encoding($spad_body, 'HTML-ENTITIES', $char_encoding);
         $spad_data = str_replace('--', '&mdash;', $spad_data);
         $d = new DOMDocument();
         $d->validateOnParse = true;
@@ -100,14 +107,12 @@ function spad_func($atts = [])
         }
         $content .= '</div>';
     } else {
-        $spad_get = wp_remote_get($spad_url);
-        $spad_body = wp_remote_retrieve_body($spad_get);
-        $spad_body = str_replace('--', '&mdash;', $spad_body);
+        $spad_data = str_replace('--', '&mdash;', $spad_body);
         $content = '';
         $d1 = new DOMDocument;
         $spad = new DOMDocument;
         libxml_use_internal_errors(true);
-        $d1->loadHTML(mb_convert_encoding($spad_body, 'HTML-ENTITIES', $char_encoding));
+        $d1->loadHTML(mb_convert_encoding($spad_data, 'HTML-ENTITIES', $char_encoding));
         libxml_clear_errors();
         libxml_use_internal_errors(false);
         $xpath = new DOMXpath($d1);
