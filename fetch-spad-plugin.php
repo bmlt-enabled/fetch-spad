@@ -52,6 +52,7 @@ function spad_func($atts = [])
     );
 
     $spad_layout = (!empty($args['layout']) ? sanitize_text_field(strtolower($args['layout'])) : get_option('spad_layout'));
+    # Get Today's Meditation from NAWS
     $spad_url = 'https://spadna.org';
     $spad_dom_element = 'table';
     $char_encoding = "UTF-8";
