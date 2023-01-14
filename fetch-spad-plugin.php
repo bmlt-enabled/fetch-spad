@@ -3,7 +3,7 @@
 Plugin Name: Fetch SPAD
 Plugin URI: https://wordpress.org/plugins/fetch-spad/
 Description: This is a plugin that fetches A Spiritual Principle A Day and puts it on your site Simply add [spad] shortcode to your page. Fetch SPAD Widget can be added to your sidebar or footer as well.
-Version: 1.0.0
+Version: 1.0.1
 Install: Drop this directory into the "wp-content/plugins/" directory and activate it.
 */
 /* Disallow direct access to the plugin file */
