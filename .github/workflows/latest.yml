@@ -74,6 +74,10 @@ jobs:
           s3_key: ${{ env.S3_KEY }}
           aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
 
+      - name: display output from action
+        run: |
+          echo ${{ steps.publish_latest.outputs.put_data }}"
+
       - uses: act10ns/slack@v1
         with:
           status: ${{ job.status }}
