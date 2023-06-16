@@ -68,7 +68,7 @@ jobs:
 
       - name: Publish Release to Latest WP 🎉
         id: publish_latest
-        uses: bmlt-enabled/wordpress-releases-github-action@v1
+        uses: bmlt-enabled/wordpress-releases-github-action@v1.2
         with:
           file: ${{ env.DIST_DIR_S3 }}/${{ env.ZIP_FILENAME }}
           s3_key: ${{ env.S3_KEY }}
