@@ -19,7 +19,7 @@ spl_autoload_register(function (string $class) {
 });
 
 use Spad\Dashboard;
-use Spad\Main;
+use Spad\Reading;
 use Spad\Widget;
 
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
@@ -29,27 +29,27 @@ class FetchSPADPlugin
     // phpcs:enable PSR1.Classes.ClassDeclaration.MissingNamespace
     public function __construct()
     {
-        add_action('admin_menu', [$this, 'spadOptionsMenu']);
-        add_action('wp_enqueue_scripts', [$this, 'spadAssets']);
-        add_shortcode('spad', [$this, 'spadMain']);
+        add_action('admin_menu', [$this, 'optionsMenu']);
+        add_action('wp_enqueue_scripts', [$this, 'assets']);
+        add_shortcode('spad', [$this, 'reading']);
         add_action('widgets_init', function () {
             register_widget(Widget::class);
         });
     }
 
-    public function spadOptionsMenu()
+    public function optionsMenu()
     {
-        $spadDashboard = new Dashboard();
-        $spadDashboard->createMenu();
+        $dashboard = new Dashboard();
+        $dashboard->createMenu();
     }
 
-    public function spadMain($atts)
+    public function reading($atts)
     {
-        $spadMain = new Main();
-        return $spadMain->runMain($atts);
+        $reading = new Reading();
+        return $reading->renderReading($atts);
     }
 
-    public function spadAssets()
+    public function assets()
     {
         wp_enqueue_style("spadcss", plugin_dir_url(__FILE__) . "css/spad.css", false, filemtime(plugin_dir_path(__FILE__) . "css/spad.css"), false);
     }
