@@ -6,21 +6,21 @@ class Widget extends \WP_Widget
 {
     public function __construct()
     {
-        $widget_ops = array(
+        $widgetOps = array(
             'classname' => 'widget',
             'description' => 'Displays the Spiritual Principle A Day',
         );
-        parent::__construct('widget', 'Fetch SPAD', $widget_ops);
+        parent::__construct('widget', 'Fetch SPAD', $widgetOps);
     }
 
     public function widget($args, $instance): void
     {
-        $spad_main = new Main();
+        $reading = new Reading();
         echo $args['before_widget'];
         if (! empty($instance['title'])) {
             echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
         }
-        echo $spad_main->runMain();
+        echo $reading->renderReading();
         echo $args['after_widget'];
     }
 
@@ -42,10 +42,10 @@ class Widget extends \WP_Widget
         <?php
     }
 
-    public function update($new_instance, $old_instance): array
+    public function update($newInstance, $oldInstance): array
     {
         $instance = array();
-        $instance['title'] = (! empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+        $instance['title'] = (! empty($newInstance['title']) ) ? strip_tags($newInstance['title']) : '';
         return $instance;
     }
 }

@@ -1,6 +1,6 @@
 === Fetch SPAD ===
 
-Contributors: pjaudiomv,
+Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
 Tested up to: 6.3.1
 Stable tag: 1.1.0
