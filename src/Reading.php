@@ -45,20 +45,20 @@ class Reading
     {
         $domDoc = $this->createDomDocument($data);
         $cssIds = array('spad-date','spad-title','spad-page','spad-quote','spad-quote-source','spad-content','spad-divider','spad-thought','spad-copyright');
-        $content = '<div id="spad-container" class="'.self::CSS_CLASS.'">';
+        $content = '<div id="spad-container" class="' . self::CSS_CLASS . '">';
         $values = [];
         $i = 0;
         $k = 1;
         foreach ($domDoc->getElementsByTagName('tr') as $element) {
             if ($i != 5) {
                 $formated_element = trim($element->nodeValue);
-                $content .= '<div id="'.$cssIds[$i].'" class="'.self::CSS_CLASS.'">'.$formated_element.'</div>';
+                $content .= '<div id="' . $cssIds[$i] . '" class="' . self::CSS_CLASS . '">' . $formated_element . '</div>';
             } else {
                 $xpath = new \DOMXPath($domDoc);
                 foreach ($xpath->query('//tr') as $row) {
                     $row_values = array();
                     foreach ($xpath->query('td', $row) as $cell) {
-                        $innerHTML= '';
+                        $innerHTML = '';
                         $children = $cell->childNodes;
                         foreach ($children as $child) {
                             $innerHTML .= $child->ownerDocument->saveXML($child);
@@ -68,10 +68,10 @@ class Reading
                     $values[] = $row_values;
                 }
                 $break_array = preg_split('/<br[^>]*>/i', (join('', $values[5])));
-                $content .= '<div id="'.$cssIds[$i].'" class="'.self::CSS_CLASS.'">';
+                $content .= '<div id="' . $cssIds[$i] . '" class="' . self::CSS_CLASS . '">';
                 foreach ($break_array as $p) {
                     if (!empty($p)) {
-                        $formated_element = '<p id="'.$cssIds[$i].'-'.$k.'" class="'.self::CSS_CLASS.'">'.trim($p).'</p>';
+                        $formated_element = '<p id="' . $cssIds[$i] . '-' . $k . '" class="' . self::CSS_CLASS . '">' . trim($p) . '</p>';
                         $content .= preg_replace("/<p[^>]*>([\s]|&nbsp;)*<\/p>/", '', $formated_element);
                         $k++;
                     }
@@ -99,7 +99,7 @@ class Reading
         $domDoc = $this->createDomDocument($data);
         $xpath = new \DOMXpath($domDoc);
         $body = $xpath->query("//" . self::DOM_ELEMENT);
-        $reading = new \DOMDocument;
+        $reading = new \DOMDocument();
         foreach ($body as $child) {
             $reading->appendChild($reading->importNode($child, true));
         }

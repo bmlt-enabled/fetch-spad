@@ -3,7 +3,7 @@
 Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
 Tested up to: 6.3.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,10 @@ This section describes how to install the plugin and get it working.
 1. screenshot-1.png
 
 == Changelog ==
+
+= 1.1.1 =
+
+* Added a settings link to the plugins page.
 
 = 1.1.0 =
 
