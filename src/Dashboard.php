@@ -4,11 +4,9 @@ namespace Spad;
 
 class Dashboard
 {
-
     public function __construct()
     {
-        add_action('admin_init', array($this, 'registerSettings'));
-        add_action('admin_menu', array($this, 'createMenu'));
+        add_action('admin_init', [$this, 'registerSettings']);
     }
 
     public function registerSettings(): void
@@ -16,15 +14,23 @@ class Dashboard
         register_setting('spad-plugin-settings-group', 'spad_layout');
     }
 
-    public function createMenu(): void
+    public function createMenu(string $baseFile): void
     {
         add_options_page(
             esc_html__('Fetch SPAD Plugin Settings'), // Page Title
             esc_html__('Fetch SPAD'),                 // Menu Title
             'manage_options',             // Capability
             'spad-plugin',                // Menu Slug
-            array($this, 'drawSettings')  // Callback function to display the page content
+            [$this, 'drawSettings']  // Callback function to display the page content
         );
+        add_filter('plugin_action_links_' . $baseFile, [$this, 'settingsLink']);
+    }
+
+    public function settingsLink($links)
+    {
+        $settings_url = admin_url('options-general.php?page=spad-plugin');
+        $links[] = "<a href='{$settings_url}'>Settings</a>";
+        return $links;
     }
 
     public function drawSettings(): void
