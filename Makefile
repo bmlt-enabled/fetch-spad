@@ -19,14 +19,14 @@ $(ZIP_FILE): $(VENDOR_AUTOLOAD)
 	mkdir ${BUILD_DIR} && mv ${ZIP_FILENAME} ${BUILD_DIR}/
 
 .PHONY: build
-build: $(clean) $(ZIP_FILE)  ## Build
+build: $(ZIP_FILE)  ## Build
 
 .PHONY: clean
 clean:  ## clean
-	rm -rf build
+	rm -rf build vendor
 
 $(VENDOR_AUTOLOAD):
-	composer install --prefer-dist --no-progress
+	composer install $(COMPOSER_ARGS)
 
 .PHONY: composer
 composer: $(VENDOR_AUTOLOAD) ## Runs composer install
