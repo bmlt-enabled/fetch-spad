@@ -2,8 +2,9 @@
 
 Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
-Tested up to: 6.3.1
-Stable tag: 1.1.1
+Requires PHP: 8.1
+Tested up to: 6.3.2
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +42,11 @@ This section describes how to install the plugin and get it working.
 1. screenshot-1.png
 
 == Changelog ==
+
+= 1.2.0 =
+
+* Requires PHP 8.1.
+* Migrated to fetch meditation lib.
 
 = 1.1.1 =
 
