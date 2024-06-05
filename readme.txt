@@ -3,14 +3,16 @@
 Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
 Requires PHP: 8.1
-Tested up to: 6.3.2
+Tested up to: 6.5.3
 Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Fetch SPAD is a plugin that pulls the Spiritual Principle A Day from https://spadna.org and puts it on your page or post.
+
 == Description ==
 
-Fetch SPAD is a plugin that pulls the Spiritual Principle A Day from https://spadna.org and puts it on your page or post. Use the widget Fetch SPAD to add to your sidebar or footer.
+Fetch SPAD is a plugin that pulls the Spiritual Principle A Day from https://spadna.org and puts it on your page or post.
 
 *Third Party Disclosure*
 
@@ -35,7 +37,7 @@ This section describes how to install the plugin and get it working.
 
 1. Download and install the plugin from WordPress dashboard. You can also upload the entire Fetch SPAD Plugin folder to the /wp-content/plugins/ directory
 2. Activate the plugin through the Plugins menu in WordPress
-3. Add [spad] shortcode to your Wordpress page/post or add widget Fetch SPAD to your sidebar, Footer etc.
+3. Add [spad] shortcode to your Wordpress page/post.
 
 == Screenshots ==
 

@@ -2,7 +2,8 @@ COMMIT := $(shell git rev-parse --short=8 HEAD)
 ZIP_FILENAME := $(or $(ZIP_FILENAME), $(shell echo "$${PWD\#\#*/}.zip"))
 BUILD_DIR := $(or $(BUILD_DIR),"build")
 VENDOR_AUTOLOAD := vendor/autoload.php
-ZIP_FILE := build/fetch-spad.zip
+BASENAME := $(shell basename $(PWD))
+ZIP_FILE := build/$(BASENAME).zip
 
 ifeq ($(PROD)x, x)
 	COMPOSER_ARGS := --prefer-dist --no-progress
@@ -23,7 +24,7 @@ build: $(ZIP_FILE)  ## Build
 
 .PHONY: clean
 clean:  ## clean
-	rm -rf build vendor
+	rm -rf build dist
 
 $(VENDOR_AUTOLOAD):
 	composer install $(COMPOSER_ARGS)
@@ -35,6 +36,22 @@ composer: $(VENDOR_AUTOLOAD) ## Runs composer install
 lint: composer ## PHP Lint
 	vendor/squizlabs/php_codesniffer/bin/phpcs
 
-.PHONY: lint-fix
-lint-fix: composer ## PHP Lint Fix
+.PHONY: fmt
+fmt: composer ## PHP Fmt
 	vendor/squizlabs/php_codesniffer/bin/phpcbf
+
+.PHONY: docs
+docs:  ## Generate Docs
+	docker run --rm -v $(shell pwd):/data phpdoc/phpdoc:3 --ignore=vendor/ -d . -t docs/
+
+.PHONY: dev
+dev:  ## Docker up
+	docker-compose up
+
+.PHONY: mysql
+mysql:  ## Runs mysql cli in mysql container
+	docker exec -it $(BASENAME)-db-1 mariadb -u root -psomewordpress wordpress
+
+.PHONY: bash
+bash:  ## Runs bash shell in wordpress container
+	docker exec -it -w /var/www/html $(BASENAME)-wordpress-1 bash
