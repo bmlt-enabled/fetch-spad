@@ -16,18 +16,11 @@ jobs:
       - name: Setup PHP 🐫
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
 
       - name: PHPCS checker 🧹
         id: php-codesniffer
         run: make lint
-
-      - uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#fetch-spad'
-        if: failure()
 
   deploy:
     runs-on: ubuntu-22.04
@@ -46,11 +39,6 @@ jobs:
       - name: Check out code 🛒
         uses: actions/checkout@v4
         id: code-checkout
-
-      - name: Setup PHP 🐫
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
 
       - name: Prepare to deploy 🔧
         run: |
@@ -78,10 +66,3 @@ jobs:
           file: ${{ env.DIST_DIR_S3 }}/${{ env.ZIP_FILENAME }}
           s3_key: ${{ env.S3_KEY }}
           aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-
-      - uses: act10ns/slack@v2
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#fetch-spad'
-        if: failure()
