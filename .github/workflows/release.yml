@@ -29,7 +29,7 @@ jobs:
       DIST_DIR_GITHUB: "dist/github"
       GITHUB_RELEASE_FILENAME: "fetch-spad.zip"
       PLUGIN: "fetch-spad"
-      MAINFILE: "fetch-spad.php"
+      MAINFILE: "fetch-spad-plugin.php"
     needs: [ lint ]
     permissions:
       contents: write
