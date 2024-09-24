@@ -3,7 +3,7 @@
 Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
 Requires PHP: 8.1
-Tested up to: 6.5.4
+Tested up to: 6.6
 Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Fetch SPAD is a plugin that pulls the Spiritual Principle A Day from https://spa
 
 *Third Party Disclosure*
 
-This plugin pulls from the SPADNA service at https://spadna.org to get the current days meditation. This is a GET request only and no information is posted to this third party service. This service itself has no privacy policy, but you can view NAs privacy policy here https://www.na.org/?ID=privacy
+This plugin pulls from the SPADNA service at https://spadna.org to get the current days meditation. This is a GET request only and no information is posted to this third party service. This service itself has no privacy policy, but you can view NAs privacy policy here https://na.org/privacy-policy/
 
 
 SHORTCODE
