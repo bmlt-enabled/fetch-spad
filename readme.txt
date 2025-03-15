@@ -3,8 +3,8 @@
 Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
 Requires PHP: 8.1
-Tested up to: 6.6
-Stable tag: 1.2.1
+Tested up to: 6.8
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ This section describes how to install the plugin and get it working.
 1. screenshot-1.png
 
 == Changelog ==
+
+= 1.2.2 =
+
+* Added fallback server.
 
 = 1.2.1 =
 
