@@ -6,7 +6,7 @@
  * Install:           Drop this directory into the "wp-content/plugins/" directory and activate it.
  * Contributors:      pjaudiomv, bmltenabled
  * Author:            bmltenabled
- * Version:           1.2.3
+ * Version:           1.2.4
  * Requires PHP:      8.1
  * Requires at least: 6.2
  * License:           GPL v2 or later
@@ -34,6 +34,7 @@ class FETCHSPAD {
 
 	private const SETTINGS_GROUP   = 'fetch-spad-group';
 	private const DEFAULT_LAYOUT = 'block';
+	private const DEFAULT_LANGUAGE = 'English';
 	private const PLUG_SLUG = 'fetch-spad';
 
 	/**
@@ -97,7 +98,13 @@ class FETCHSPAD {
 
 	public static function render_shortcode( string|array $attrs = [] ): string {
 		$layout   = self::determine_option( $attrs, 'layout' );
-		$settings = new SPADSettings( SPADLanguage::English );
+		$language = self::determine_option( $attrs, 'language' );
+		$selected_language = match ( $language ) {
+				'english' => SPADLanguage::English,
+				'german' => SPADLanguage::German,
+				default => SPADLanguage::English
+		};
+		$settings = new SPADSettings( $selected_language );
 		$instance = SPAD::getInstance( $settings );
 		$entry    = $instance->fetch();
 		if ( is_string( $entry ) ) {
@@ -183,6 +190,15 @@ class FETCHSPAD {
 				'sanitize_callback' => 'sanitize_text_field',
 			]
 		);
+		register_setting(
+			self::SETTINGS_GROUP,
+			'fetch_spad_language',
+			[
+				'type'              => 'string',
+				'default'           => self::DEFAULT_LANGUAGE,
+				'sanitize_callback' => 'sanitize_text_field',
+			]
+		);
 	}
 
 	public static function create_menu(): void {
@@ -208,6 +224,7 @@ class FETCHSPAD {
 	public static function draw_settings(): void {
 		// Display the plugin's settings page
 		$spad_layout   = esc_attr( get_option( 'fetch_spad_layout' ) );
+		$spad_language = esc_attr( get_option( 'fetch_spad_language' ) );
 		$allowed_html = [
 			'select' => [
 				'id'   => [],
@@ -237,6 +254,24 @@ class FETCHSPAD {
 									[
 										'table' => 'Table',
 										'block' => 'Block (CSS)',
+									]
+								),
+								$allowed_html
+							);
+							?>
+						</td>
+					</tr>
+					<tr valign="top" id="language-container">
+						<th scope="row">Language</th>
+						<td>
+							<?php
+							echo wp_kses(
+								static::render_select_option(
+									'fetch_spad_language',
+									$spad_language,
+									[
+										'english'    => 'English',
+										'german'     => 'German',
 									]
 								),
 								$allowed_html

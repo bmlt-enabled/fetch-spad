@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e67fdc3593258a7dee00968ce91c36d",
+    "content-hash": "4837868c838f078b2e6f11dc8f7a9844",
     "packages": [
         {
             "name": "bmlt/fetch-meditation",
-            "version": "1.1.8",
+            "version": "1.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmlt-enabled/fetch-meditation.git",
-                "reference": "443067f46fa39f799c5be8a12771541fe55f0b4c"
+                "reference": "ab50c9a0603af6fbb614fa6bc98a61f55ea95237"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmlt-enabled/fetch-meditation/zipball/443067f46fa39f799c5be8a12771541fe55f0b4c",
-                "reference": "443067f46fa39f799c5be8a12771541fe55f0b4c",
+                "url": "https://api.github.com/repos/bmlt-enabled/fetch-meditation/zipball/ab50c9a0603af6fbb614fa6bc98a61f55ea95237",
+                "reference": "ab50c9a0603af6fbb614fa6bc98a61f55ea95237",
                 "shasum": ""
             },
             "require": {
@@ -55,9 +55,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bmlt-enabled/fetch-meditation/issues",
-                "source": "https://github.com/bmlt-enabled/fetch-meditation/tree/1.1.8"
+                "source": "https://github.com/bmlt-enabled/fetch-meditation/tree/1.1.9"
             },
-            "time": "2025-03-29T14:28:35+00:00"
+            "time": "2025-03-30T13:55:50+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

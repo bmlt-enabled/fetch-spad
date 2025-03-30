@@ -4,7 +4,7 @@ Contributors: pjaudiomv, bmltenabled
 Tags: spad, spiritual principle a day, narcotics anonymous, na
 Requires PHP: 8.1
 Tested up to: 6.8
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,9 +45,13 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
+= 1.2.4 =
+
+* Add Deutsch SPAD.
+
 = 1.2.3 =
 
-* French language fixes.
+* Update dependencies.
 
 = 1.2.2 =
 
