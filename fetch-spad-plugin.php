@@ -6,7 +6,7 @@
  * Install:           Drop this directory into the "wp-content/plugins/" directory and activate it.
  * Contributors:      pjaudiomv, bmltenabled
  * Author:            bmltenabled
- * Version:           1.2.4
+ * Version:           1.3.0
  * Requires PHP:      8.1
  * Requires at least: 6.2
  * License:           GPL v2 or later
@@ -64,6 +64,7 @@ class FETCHSPAD {
 		if ( is_admin() ) {
 			add_action( 'admin_menu', [ static::class, 'create_menu' ] );
 			add_action( 'admin_init', [ static::class, 'register_settings' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_backend_files' ], 500 );
 		} else {
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_files' ] );
 			add_shortcode( 'spad', [ static::class, 'render_shortcode' ] );
@@ -99,12 +100,15 @@ class FETCHSPAD {
 	public static function render_shortcode( string|array $attrs = [] ): string {
 		$layout   = self::determine_option( $attrs, 'layout' );
 		$language = self::determine_option( $attrs, 'language' );
+		$timezone = self::determine_option( $attrs, 'timezone' );
+		$use_timezone = 'english' === $language && ! empty( $timezone ) ? $timezone : null;
+
 		$selected_language = match ( $language ) {
 				'english' => SPADLanguage::English,
 				'german' => SPADLanguage::German,
 				default => SPADLanguage::English
 		};
-		$settings = new SPADSettings( $selected_language );
+		$settings = new SPADSettings( $selected_language, $use_timezone );
 		$instance = SPAD::getInstance( $settings );
 		$entry    = $instance->fetch();
 		if ( is_string( $entry ) ) {
@@ -175,6 +179,14 @@ class FETCHSPAD {
 		return $content;
 	}
 
+	public function enqueue_backend_files( string $hook ): void {
+		if ( 'settings_page_' . self::PLUG_SLUG !== $hook ) {
+			return;
+		}
+		$base_url = plugin_dir_url( __FILE__ );
+		wp_enqueue_script( 'fetch-spad-admin', $base_url . 'js/fetch-spad.js', [ 'jquery' ], filemtime( plugin_dir_path( __FILE__ ) . 'js/fetch-spad.js' ), false );
+	}
+
 	public function enqueue_frontend_files(): void {
 		wp_enqueue_style( self::PLUG_SLUG, plugin_dir_url( __FILE__ ) . 'css/fetch-spad.css', false, '1.0.0', 'all' );
 	}
@@ -196,6 +208,15 @@ class FETCHSPAD {
 			[
 				'type'              => 'string',
 				'default'           => self::DEFAULT_LANGUAGE,
+				'sanitize_callback' => 'sanitize_text_field',
+			]
+		);
+		register_setting(
+			self::SETTINGS_GROUP,
+			'fetch_spad_timezone',
+			[
+				'type'              => 'string',
+				'default'           => '',
 				'sanitize_callback' => 'sanitize_text_field',
 			]
 		);
@@ -225,6 +246,7 @@ class FETCHSPAD {
 		// Display the plugin's settings page
 		$spad_layout   = esc_attr( get_option( 'fetch_spad_layout' ) );
 		$spad_language = esc_attr( get_option( 'fetch_spad_language' ) );
+		$timezone      = esc_attr( get_option( 'fetch_spad_timezone' ) );
 		$allowed_html = [
 			'select' => [
 				'id'   => [],
@@ -277,6 +299,37 @@ class FETCHSPAD {
 								$allowed_html
 							);
 							?>
+						</td>
+					</tr>
+					<tr valign="top" id="timezone-container">
+						<th scope="row">Timezone (English Only)</th>
+						<td>
+							<?php
+							$timezone_options = [
+								'' => 'Server Default',
+								'America/New_York' => 'America/New_York',
+								'America/Chicago' => 'America/Chicago',
+								'America/Denver' => 'America/Denver',
+								'America/Los_Angeles' => 'America/Los_Angeles',
+								'America/Anchorage' => 'America/Anchorage',
+								'America/Honolulu' => 'America/Honolulu',
+								'America/Phoenix' => 'America/Phoenix',
+								'Europe/London' => 'Europe/London',
+								'Europe/Paris' => 'Europe/Paris',
+								'Europe/Berlin' => 'Europe/Berlin',
+								'Australia/Sydney' => 'Australia/Sydney',
+								'Asia/Tokyo' => 'Asia/Tokyo',
+							];
+							echo wp_kses(
+								static::render_select_option(
+									'fetch_spad_timezone',
+									$timezone,
+									$timezone_options
+								),
+								$allowed_html
+							);
+							?>
+							<p class="description">Only applies when English language is selected. Leave blank to use server default.</p>
 						</td>
 					</tr>
 				</table>
