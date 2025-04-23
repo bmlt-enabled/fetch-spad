@@ -6,7 +6,7 @@
  * Install:           Drop this directory into the "wp-content/plugins/" directory and activate it.
  * Contributors:      pjaudiomv, bmltenabled
  * Author:            bmltenabled
- * Version:           1.3.0
+ * Version:           1.3.1
  * Requires PHP:      8.1
  * Requires at least: 6.2
  * License:           GPL v2 or later
@@ -307,6 +307,7 @@ class FETCHSPAD {
 							<?php
 							$timezone_options = [
 								'' => 'Server Default',
+								// North America
 								'America/New_York' => 'America/New_York',
 								'America/Chicago' => 'America/Chicago',
 								'America/Denver' => 'America/Denver',
@@ -314,11 +315,37 @@ class FETCHSPAD {
 								'America/Anchorage' => 'America/Anchorage',
 								'America/Honolulu' => 'America/Honolulu',
 								'America/Phoenix' => 'America/Phoenix',
+
+								// South America
+								'America/Sao_Paulo' => 'America/Sao_Paulo',
+								'America/Argentina/Buenos_Aires' => 'America/Argentina/Buenos_Aires',
+								'America/Santiago' => 'America/Santiago',
+
+								// Europe
 								'Europe/London' => 'Europe/London',
 								'Europe/Paris' => 'Europe/Paris',
 								'Europe/Berlin' => 'Europe/Berlin',
-								'Australia/Sydney' => 'Australia/Sydney',
+								'Europe/Moscow' => 'Europe/Moscow',
+
+								// Africa
+								'Africa/Cairo' => 'Africa/Cairo',
+								'Africa/Johannesburg' => 'Africa/Johannesburg',
+								'Africa/Lagos' => 'Africa/Lagos',
+
+								// Asia
+								'Asia/Dubai' => 'Asia/Dubai',
+								'Asia/Kolkata' => 'Asia/Kolkata',
+								'Asia/Bangkok' => 'Asia/Bangkok',
+								'Asia/Singapore' => 'Asia/Singapore',
 								'Asia/Tokyo' => 'Asia/Tokyo',
+								'Asia/Shanghai' => 'Asia/Shanghai',
+								'Asia/Seoul' => 'Asia/Seoul',
+
+								// Australia/Pacific
+								'Australia/Sydney' => 'Australia/Sydney',
+								'Australia/Perth' => 'Australia/Perth',
+								'Pacific/Auckland' => 'Pacific/Auckland',
+								'Pacific/Fiji' => 'Pacific/Fiji',
 							];
 							echo wp_kses(
 								static::render_select_option(
