@@ -2,11 +2,11 @@
 /**
  * Plugin Name:       Fetch SPAD
  * Plugin URI:        https://wordpress.org/plugins/fetch-spad/
- * Description:       This is a plugin that fetches A Spiritual Principle A Day and puts it on your site Simply add [spad] shortcode to your page. Fetch SPAD Widget can be added to your sidebar or footer as well.
+ * Description:       ⚠️ DEPRECATED: This plugin is being retired. Please use "Fetch Meditation" instead: https://wordpress.org/plugins/fetch-meditation/ - This is a plugin that fetches A Spiritual Principle A Day and puts it on your site Simply add [spad] shortcode to your page. Fetch SPAD Widget can be added to your sidebar or footer as well.
  * Install:           Drop this directory into the "wp-content/plugins/" directory and activate it.
  * Contributors:      pjaudiomv, bmltenabled
  * Author:            bmltenabled
- * Version:           1.3.3
+ * Version:           1.4.0
  * Requires PHP:      8.1
  * Requires at least: 6.2
  * License:           GPL v2 or later
@@ -49,6 +49,18 @@ class FETCHSPAD {
 	 */
 	public function __construct() {
 		add_action( 'init', [ $this, 'plugin_setup' ] );
+		add_action( 'admin_notices', [ $this, 'retirement_notice' ] );
+	}
+
+	/**
+	 * Display retirement notice in admin dashboard.
+	 */
+	public function retirement_notice(): void {
+		echo '<div class="notice notice-warning is-dismissible">';
+		echo '<p><strong>⚠️ Fetch SPAD Plugin Retirement Notice</strong></p>';
+		echo '<p>This plugin is being retired and will no longer receive updates. Please migrate to the new <a href="https://wordpress.org/plugins/fetch-meditation/" target="_blank"><strong>Fetch Meditation</strong></a> plugin which includes SPAD functionality plus additional features.</p>';
+		echo '<p>The new plugin supports both "Just For Today" and "Spiritual Principle A Day" meditations and maintains full compatibility with your existing <code>[spad]</code> shortcodes.</p>';
+		echo '</div>';
 	}
 
 	/**
@@ -260,6 +272,20 @@ class FETCHSPAD {
 		?>
 		<div class="wrap">
 			<h2>Fetch Spad Settings</h2>
+			
+			<div class="notice notice-warning" style="padding: 15px; margin: 20px 0; border-left: 4px solid #ff8c00;">
+				<h3 style="margin-top: 0;">⚠️ Plugin Retirement Notice</h3>
+				<p><strong>This plugin is being retired and will no longer receive updates or support.</strong></p>
+				<p>Please migrate to the new <a href="https://wordpress.org/plugins/fetch-meditation/" target="_blank" style="color: #0073aa; text-decoration: none;"><strong>Fetch Meditation</strong></a> plugin which provides the same SPAD functionality plus additional features:</p>
+				<ul>
+					<li>Supports both "Just For Today" (JFT) and "Spiritual Principle A Day" (SPAD) meditations</li>
+					<li>Enhanced language support and timezone features</li>
+					<li>Actively maintained and supported</li>
+					<li>Easy migration: your existing <code>[spad]</code> shortcodes will continue to work</li>
+				</ul>
+				<p><a href="https://wordpress.org/plugins/fetch-meditation/" target="_blank" class="button button-primary">Download Fetch Meditation Plugin</a></p>
+			</div>
+			
 			<form method="post" action="options.php">
 				<?php wp_nonce_field( 'fetch_spad_action', 'fetch_spad_nonce' ); ?>
 				<?php settings_fields( self::SETTINGS_GROUP ); ?>
